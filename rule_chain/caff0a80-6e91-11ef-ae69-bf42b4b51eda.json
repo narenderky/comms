@@ -1,0 +1,83 @@
+{
+  "entityType" : "RULE_CHAIN",
+  "entity" : {
+    "additionalInfo" : {
+      "description" : ""
+    },
+    "configuration" : null,
+    "debugMode" : false,
+    "externalId" : null,
+    "firstRuleNodeId" : {
+      "entityType" : "RULE_NODE",
+      "id" : "72cc8a70-6e93-11ef-ae69-bf42b4b51eda"
+    },
+    "id" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "caff0a80-6e91-11ef-ae69-bf42b4b51eda"
+    },
+    "name" : "pump rule chain",
+    "root" : false,
+    "type" : "CORE"
+  },
+  "metaData" : {
+    "connections" : [ {
+      "fromIndex" : 0,
+      "toIndex" : 1,
+      "type" : "Success"
+    } ],
+    "firstNodeIndex" : 0,
+    "nodes" : [ {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 210,
+        "layoutY" : 281
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "// Extracting the properties object from the incoming telemetry data\nvar properties = msg.thing.properties;  // The 'properties' object contains all the fields you want\n\n// Initialize an empty object to store the telemetry data\nvar telemetryData = {};\n\n// Use a loop to iterate over all keys in the 'properties' object\nfor (var key in properties) {\n    if (properties.hasOwnProperty(key)) {\n        // Dynamically assign the value from 'properties' to 'telemetryData'\n        telemetryData[key] = properties[key];\n    }\n}\n\n// Return the telemetry data in the 'msg' field, along with metadata and msgType\nreturn {\n    msg: telemetryData,     // Send the extracted telemetry data as 'msg'\n    metadata: metadata,     // Pass along the metadata as it is\n    msgType: msgType        // Pass along the message type as it is\n};",
+        "tbelScript" : "return {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "72cc8a70-6e93-11ef-ae69-bf42b4b51eda"
+      },
+      "name" : "extracting values",
+      "queueName" : null,
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 594,
+        "layoutY" : 303
+      },
+      "configuration" : {
+        "forwardMsgToDefaultRuleChain" : false,
+        "ruleChainId" : "632463e0-6e6b-11ef-ae69-bf42b4b51eda"
+      },
+      "configurationVersion" : 1,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "72d4a0c0-6e93-11ef-ae69-bf42b4b51eda"
+      },
+      "name" : "rule chainn",
+      "queueName" : null,
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.flow.TbRuleChainInputNode"
+    } ],
+    "ruleChainConnections" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}
